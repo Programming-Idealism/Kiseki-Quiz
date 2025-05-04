@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+    background-color: #0d1117;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 10px ridge whitesmoke;
+    outline: 10px ridge black;
+    height: 80%;
+    width: 80%;
+    background-color: hsl(216, 28%, 20%);
+    color: white;
+    border-radius: 30px 30px;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    background-color: navy;
+    color: aqua;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: roboto;
+    font-size: 1.9rem;
+    box-shadow: 0px 0px 5px white;
+}
+
+.tutorial {
+    color: greenyellow;
+    font-family: arial;
+    font-size: 1.2rem;
+}
+
+.tutorial span:nth-of-type(1) {
+    color: hsl(207, 44%, 70%);
+    text-decoration: underline;
+    display: inline-block;
+    font-size: 2.1rem;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-family: verdana;
+    font-weight: bold;
+    font-variant: small-caps;
+    -webkit-text-stroke: 2px blue;
+}
+
+.tutorial span:nth-of-type(2) {
+    display: inline-block;
+    color: aqua;
+    background-color: red;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.buttons-container {
+    display: flex;
+}
+
+.campy {
+    width: 220px;
+    transition: all 500ms ease-in-out;
+    &:hover {
+        transform: scale(1.08) translateY(-15px);
+    }
+}
+
+.start-button {
+    background-color: black;
+    color: whitesmoke;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    margin-top: 8px;
+    border: 7px ridge gray;
+    font-family: verdana;
+    font-weight: bold;
+    box-shadow: 0px 0px 35px black;
+    cursor: pointer;
+    transition: all 600ms ease-in-out;
+    &:hover {
+        background-color: hsl(0, 0%, 6%);
+        transform: scale(1.2) skewX(-2deg);
+    }
+}
+
+.question {
+    font-family: roboto;
+    font-size: 1.7rem;
+    color: hsl(16, 100%, 65%);
+}
+
+.timer-display {
+    color: hsl(0, 100%, 65%);
+    margin-bottom: 5px;
+    margin-top: -8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.loss-message:empty {
+    display: none;
+}
+
+.loss-message {
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.3rem;
+    color: white;
+    padding: 10px;
+    border-radius: 2px 20px;
+    background-color: black;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.loss-message::before {
+    content: "💀";
+    font-size: 1.8rem;
+    margin-right: 10px;
+}
+
+.reset-button {
+    display: block;
+    color: yellow;
+    background-color: red;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 1.8rem;
+    font-family: roboto;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    &:hover {
+        transform: scale(1.15);
+        background-color: hsl(0, 100%, 53%);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.answer-button {
+    width: 120px;
+    height: 40px;
+    margin: 8px;
+    margin-top: 25px;
+    border: 2px ridge whitesmoke;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 250ms ease;
+    &:hover {
+        transform: scale(1.12);
+    }
+}
+
+.answer-button:disabled {
+    background-color: darkred;
+    cursor: not-allowed;
+}
+
+#result {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.victory-message {
+    font-size: 2.1rem;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-family: fantasy;
+    padding: 20px;
+    margin: 10px;
+    color: darkgreen;
+    background-color: rgb(144, 193, 193);
+    border-radius: 10px;
+}
