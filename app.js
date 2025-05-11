@@ -75,9 +75,9 @@ let timerInterval = null;
 let timerDisplay;
 
 const TOTAL_QUESTIONS_PER_LEVEL = {
-    tierOne: 1,
-    tierTwo: 1,
-    tierThree: 1
+    tierOne: 10,
+    tierTwo: 20,
+    tierThree: 30
 };
 
 function produceQuestionsAndAnswers(tier = 'tierOne') {
