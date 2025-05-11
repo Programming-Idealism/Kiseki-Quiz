@@ -69,7 +69,7 @@ let currentLevel = 1;
 let isGameOn = false;
 let resultTimeout = null;
 
-const TIME_LIMIT = 500;
+const TIME_LIMIT = 10;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let timerDisplay;
