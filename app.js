@@ -69,15 +69,15 @@ let currentLevel = 1;
 let isGameOn = false;
 let resultTimeout = null;
 
-const TIME_LIMIT = 10;
+const TIME_LIMIT = 500;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
 let timerDisplay;
 
 const TOTAL_QUESTIONS_PER_LEVEL = {
-    tierOne: 10,
-    tierTwo: 20,
-    tierThree: 30
+    tierOne: 1,
+    tierTwo: 1,
+    tierThree: 1
 };
 
 function produceQuestionsAndAnswers(tier = 'tierOne') {
@@ -270,8 +270,8 @@ function produceQuestionsAndAnswers(tier = 'tierOne') {
         },
         {
             question: `Who is the strongest enforcer among Ouroboros?`,
-            answers: [`Leonhart`, `Mcburn`, `Arianrhod`, `Simeon`],
-            correctAnswer: 'Mcburn'
+            answers: [`Leonhart`, `McBurn`, `Arianrhod`, `Simeon`],
+            correctAnswer: 'McBurn'
         },
         {
             question: `What was Sharon Kreuger's speciality during her days in Ouroboros?`,
@@ -504,6 +504,7 @@ function generateUtilities() {
         questionElement.classList.add('question');
         questionElement.textContent = randomQuestion.question;
         lives.innerHTML = LIVES_ICON.repeat(remainingLives);
+        lives.classList.add('lives');
         questionElement.insertAdjacentElement('beforebegin', lives);
         questionElement.insertAdjacentElement('afterend', timerDisplay);
 
@@ -717,20 +718,18 @@ function implementLoss() {
 }
 
 function victoryMessage() {
-    if (lossMessage.parentNode) {
-        lossMessage.parentNode.removeChild(lossMessage);
-    }
-    const victoryMessageElement = document.createElement('div');
-    victoryMessageElement.classList.add('victory-message');
-    victoryMessageElement.textContent = `Hahaha! AMAZING! You've conquered the Kiseki's ultimate trivia. You are quite a spectacular specimen, aren't you?`;
-    container.appendChild(victoryMessageElement);
+  lossMessage.classList.add('hidden');
+  const victoryMessageElement = document.createElement('div');
+  victoryMessageElement.classList.add('victory-message');
+  victoryMessageElement.textContent = `Hahaha! AMAZING! You've conquered the Kiseki's ultimate trivia. You are quite a spectacular specimen, aren't you?`;
+  container.appendChild(victoryMessageElement);
 
-    if (lives) lives.classList.add('hidden');
-    document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
-    resultDisplay.classList.add('hidden');
-    lossMessage.classList.add('hidden');
-    timerDisplay.classList.add('hidden');
+  if (lives) lives.classList.add('hidden');
+  document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+  resultDisplay.classList.add('hidden');
+  timerDisplay.classList.add('hidden');
 }
+
 
 function losingMessage(customMessage) {
     lossMessage.textContent = customMessage || `GAME OVER! You've lost the Kiseki Trivia.. Keep on trying, we're sure someone of your Kiseki knowledge caliber could manage that, right?`;
@@ -745,70 +744,66 @@ function losingMessage(customMessage) {
 function resetGame(playerWon = false) {
     stopTimer();
     isGameOn = false;
-    buttonsContainer.innerHTML = '';
-    const existingResetButton = document.querySelector('.reset-button');
-    const existingVictoryMessage = document.querySelector('.victory-message');
-    if (existingResetButton) {
-        existingResetButton.remove();
-    }
-    lossMessage.classList.add('hidden');
-    const startButton = document.querySelector('.start-button');
-    const resetButton = document.createElement('button');
-    const answerButtons = document.querySelectorAll('.answer-button');
-    if (answerButtons.length > 0) {
-        const lastAnswerButton = answerButtons[answerButtons.length - 1];
-        lastAnswerButton.insertAdjacentElement('afterend', resetButton);
-    } else {
-        resultDisplay.insertAdjacentElement('afterend', resetButton);
-    }
-    container.appendChild(resetButton);
-    container.appendChild(lossMessage);
-    lossMessage.classList.remove('hidden');
-    resetButton.classList.add('reset-button');
-    resetButton.textContent = 'Restart Quiz?';
-    resetButton.classList.remove('hidden');
 
-    document.querySelectorAll('.question').forEach(question => question.remove());
+    buttonsContainer.innerHTML = "";
+    const oldReset = document.querySelector(".reset-button");
+    if (oldReset) oldReset.remove();
 
-    remainingLives = MAX_FAILURES;
-    currentQuestionIndex = 0;
-    failCount = 0;
-    questionsAnswered = 0;
-    currentLevel = 1;
-    resultDisplay.textContent = '';
-    if (lives) {
-        lives.innerHTML = LIVES_ICON.repeat(remainingLives);
-        lives.classList.add('hidden');
+    if (playerWon) {
+        lossMessage.classList.add("hidden");
+        lossMessage.textContent = "";
     }
-    timerDisplay.classList.add('hidden');
     if (!playerWon) {
-        const produceLosingMessage = losingMessage();
-        resetButton.insertAdjacentElement('beforebegin', produceLosingMessage);
+        const oldVictory = document.querySelector(".victory-message");
+        if (oldVictory) oldVictory.remove();
     }
-    resetButton.addEventListener('click', () => {
+
+    const resetButton = document.createElement("button");
+    resetButton.classList.add("reset-button");
+    resetButton.textContent = "Restart Quiz?";
+
+    if (!playerWon) {
+        lossMessage.classList.remove("hidden");
+    }
+
+    const ReferencedElement = playerWon
+        ? document.querySelector(".victory-message")
+        : lossMessage;
+
+    if (ReferencedElement && ReferencedElement.parentNode) {
+        ReferencedElement.insertAdjacentElement("afterend", resetButton);
+    } else {
+        container.appendChild(resetButton);
+    }
+
+    resetButton.addEventListener("click", () => {
         if (isGameOn) return;
         isGameOn = true;
-        const victoryMessage = document.querySelector('.victory-message');
-        if (victoryMessage) victoryMessage.remove();
-        lossMessage.classList.add('hidden');
-        audioTracks.danger.pause();
-        audioTracks.danger.currentTime = 0;
-        audioTracks.lose.pause();
-        audioTracks.lose.currentTime = 0;
-        audioTracks.win.pause();
-        audioTracks.win.currentTime = 0;
+
+        const victoryEl = document.querySelector(".victory-message");
+        if (victoryEl) victoryEl.remove();
+
+        ["danger", "lose", "win"].forEach(key => {
+            audioTracks[key].pause();
+            audioTracks[key].currentTime = 0;
+        });
         audioTracks.begin.play();
-        document.querySelectorAll('.answer-button').forEach(answer => answer.remove());
+        document.querySelectorAll(".answer-button").forEach(btn => btn.remove());
+        remainingLives = MAX_FAILURES;
         lives.innerHTML = LIVES_ICON.repeat(remainingLives);
-        lives.classList.remove('hidden');
-        startButton.insertAdjacentElement('afterend', lives);
-        resetButton.classList.add('hidden');
-        resultDisplay.classList.remove('hidden');
-        timerDisplay.classList.remove('hidden');
+        lives.classList.remove("hidden");
+        lossMessage.classList.add("hidden");
+        resetButton.classList.add("hidden");
+        resultDisplay.classList.remove("hidden");
+        timerDisplay.classList.remove("hidden");
         tierOneAvailableQuestions = [];
         tierTwoAvailableQuestions = [];
         tierThreeAvailableQuestions = [];
-        const randomQuestion = produceQuestionsAndAnswers('tierOne');
-        renderQuestions(randomQuestion);
+        questionsAnswered = 0;
+        failCount = 0;
+        currentLevel = 1;
+
+        const firstQuestion = produceQuestionsAndAnswers("tierOne");
+        renderQuestions(firstQuestion);
     });
 }

@@ -71,6 +71,7 @@ h1 {
 .campy {
     width: 220px;
     transition: all 500ms ease-in-out;
+
     &:hover {
         transform: scale(1.08) translateY(-15px);
     }
@@ -89,6 +90,7 @@ h1 {
     box-shadow: 0px 0px 35px black;
     cursor: pointer;
     transition: all 600ms ease-in-out;
+
     &:hover {
         background-color: hsl(0, 0%, 6%);
         transform: scale(1.2) skewX(-2deg);
@@ -143,6 +145,7 @@ h1 {
     margin-top: 5px;
     cursor: pointer;
     transition: all 500ms ease-in-out;
+
     &:hover {
         transform: scale(1.15);
         background-color: hsl(0, 100%, 53%);
@@ -164,6 +167,7 @@ h1 {
     border-radius: 10px;
     cursor: pointer;
     transition: all 250ms ease;
+
     &:hover {
         transform: scale(1.12);
     }
@@ -180,13 +184,82 @@ h1 {
 }
 
 .victory-message {
-    font-size: 2.1rem;
+    font-size: 2rem;
     font-weight: bold;
     font-variant: small-caps;
-    font-family: fantasy;
+    font-family: Delius Swash Caps;
     padding: 20px;
     margin: 10px;
     color: darkgreen;
     background-color: rgb(144, 193, 193);
     border-radius: 10px;
+}
+
+/* Optimization for mobile */
+
+@media (max-width: 480px) {
+    h1 {
+        padding: 5px 10px;
+        font-size: 1.1rem;
+    }
+
+    .tutorial {
+        color: greenyellow;
+        font-family: arial;
+        font-size: 0.8rem;
+    }
+
+    .tutorial span:nth-of-type(1) {
+        font-size: 1.2rem;
+        margin-right: 3px;
+    }
+
+    .lives img {
+        height: 38px !important; 
+        width: 38px !important;
+    }
+
+    .question {
+    font-size: 1.2rem;
+}
+
+.timer-display {
+    font-size: 1rem;
+}
+
+.answer-button {
+    width: 75px;
+    height: 35px;
+    margin: 2px;
+    margin-top: 10px;
+    font-size: 0.57rem;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.loss-message {
+    font-size: 0.9rem;
+}
+
+.loss-message::before {
+    font-size: 1.6rem;
+}
+
+.victory-message {
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-family: Delius Swash Caps;
+    padding: 3px;
+    margin: 10px;
+    color: darkgreen;
+    background-color: rgb(144, 193, 193);
+    border-radius: 10px;
+}
+
+#result {
+    font-size: 1.0rem;
+    font-weight: bold;
+}
 }
