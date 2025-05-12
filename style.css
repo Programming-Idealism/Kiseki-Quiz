@@ -263,3 +263,95 @@ h1 {
     font-weight: bold;
 }
 }
+
+/* Optimization for mobile landscape mode */
+
+@media (max-width: 780px) and (orientation: landscape) {
+
+
+    .main-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+        width: 80%;
+        border-radius: 30px 30px;
+        text-align: center;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .campy {
+        width: 20%;
+    }
+
+    h1 {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+
+    .tutorial {
+        font-size: 0.8rem;
+    }
+
+    .tutorial span:nth-of-type(1) {
+        font-size: 1.2rem;
+        margin-right: 3px;
+    }
+
+    .lives img {
+        height: 38px !important;
+        width: 38px !important;
+    }
+
+    .question {
+        font-size: 1.2rem;
+    }
+
+    .timer-display {
+        font-size: 1rem;
+    }
+
+    .answer-button {
+        width: 75px;
+        height: 35px;
+        margin: 2px;
+        margin-top: 10px;
+        font-size: 0.57rem;
+    }
+
+    .start-button {
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    position: absolute;
+    top: 34%;
+    right: 28.5%;
+}
+
+    .loss-message {
+        font-size: 0.9rem;
+    }
+
+    .loss-message::before {
+        font-size: 1.6rem;
+    }
+
+    .victory-message {
+        font-size: 1.3rem;
+        padding: 3px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    #result {
+        font-size: 1.0rem;
+    }
+
+    
+.reset-button {
+    margin-top: -4px;
+}
+}

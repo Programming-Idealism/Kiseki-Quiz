@@ -718,16 +718,16 @@ function implementLoss() {
 }
 
 function victoryMessage() {
-  lossMessage.classList.add('hidden');
-  const victoryMessageElement = document.createElement('div');
-  victoryMessageElement.classList.add('victory-message');
-  victoryMessageElement.textContent = `Hahaha! AMAZING! You've conquered the Kiseki's ultimate trivia. You are quite a spectacular specimen, aren't you?`;
-  container.appendChild(victoryMessageElement);
+    lossMessage.classList.add('hidden');
+    const victoryMessageElement = document.createElement('div');
+    victoryMessageElement.classList.add('victory-message');
+    victoryMessageElement.textContent = `Hahaha! AMAZING! You've conquered the Kiseki's ultimate trivia. You are quite a spectacular specimen, aren't you?`;
+    container.appendChild(victoryMessageElement);
 
-  if (lives) lives.classList.add('hidden');
-  document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
-  resultDisplay.classList.add('hidden');
-  timerDisplay.classList.add('hidden');
+    if (lives) lives.classList.add('hidden');
+    document.querySelectorAll('.question').forEach(question => question.classList.add('hidden'));
+    resultDisplay.classList.add('hidden');
+    timerDisplay.classList.add('hidden');
 }
 
 
@@ -735,7 +735,7 @@ function losingMessage(customMessage) {
     lossMessage.textContent = customMessage || `GAME OVER! You've lost the Kiseki Trivia.. Keep on trying, we're sure someone of your Kiseki knowledge caliber could manage that, right?`;
     lossMessage.classList.remove('hidden');
     if (lives) lives.classList.add('hidden');
-    document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+    document.querySelectorAll('.question').forEach(question => question.classList.add('hidden'));
     resultDisplay.classList.add('hidden');
     timerDisplay.classList.add('hidden');
     return lossMessage;
@@ -788,7 +788,7 @@ function resetGame(playerWon = false) {
             audioTracks[key].currentTime = 0;
         });
         audioTracks.begin.play();
-        document.querySelectorAll(".answer-button").forEach(btn => btn.remove());
+        document.querySelectorAll(".answer-button").forEach(button => button.remove());
         remainingLives = MAX_FAILURES;
         lives.innerHTML = LIVES_ICON.repeat(remainingLives);
         lives.classList.remove("hidden");
